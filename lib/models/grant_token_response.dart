@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 class GrantTokenResponse {
+  final String username;
   final String statusCode;
   final String statusMessage;
   final String idToken;
@@ -9,6 +10,7 @@ class GrantTokenResponse {
   final int expiresIn;
   final String refreshToken;
   GrantTokenResponse({
+    required this.username,
     required this.statusCode,
     required this.statusMessage,
     required this.idToken,
@@ -18,6 +20,7 @@ class GrantTokenResponse {
   });
 
   GrantTokenResponse copyWith({
+    String? username,
     String? statusCode,
     String? statusMessage,
     String? idToken,
@@ -26,6 +29,7 @@ class GrantTokenResponse {
     String? refreshToken,
   }) {
     return GrantTokenResponse(
+      username: username ?? this.username,
       statusCode: statusCode ?? this.statusCode,
       statusMessage: statusMessage ?? this.statusMessage,
       idToken: idToken ?? this.idToken,
@@ -37,6 +41,7 @@ class GrantTokenResponse {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'username': username,
       'statusCode': statusCode,
       'statusMessage': statusMessage,
       'id_token': idToken,
@@ -48,6 +53,7 @@ class GrantTokenResponse {
 
   factory GrantTokenResponse.fromMap(Map<String, dynamic> map) {
     return GrantTokenResponse(
+      username: map['usernsme'] as String,
       statusCode: map['statusCode'] as String,
       statusMessage: map['statusMessage'] as String,
       idToken: map['id_token'] as String,
@@ -71,7 +77,8 @@ class GrantTokenResponse {
   bool operator ==(covariant GrantTokenResponse other) {
     if (identical(this, other)) return true;
 
-    return other.statusCode == statusCode &&
+    return other.username == username &&
+        other.statusCode == statusCode &&
         other.statusMessage == statusMessage &&
         other.idToken == idToken &&
         other.tokenType == tokenType &&
@@ -81,7 +88,8 @@ class GrantTokenResponse {
 
   @override
   int get hashCode {
-    return statusCode.hashCode ^
+    return username.hashCode ^
+        statusCode.hashCode ^
         statusMessage.hashCode ^
         idToken.hashCode ^
         tokenType.hashCode ^

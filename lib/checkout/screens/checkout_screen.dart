@@ -25,6 +25,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   // Grant token
   Future<GrantTokenResponse> grantToken() async {
     const username = String.fromEnvironment("username");
+    print("username:$username");
     if (username.isEmpty) {
       throw AssertionError("Username is not set");
     }
@@ -46,7 +47,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "username": "01737329731",
+        "username": "PGW",
         "password": "T01C<0?x!X5",
       },
       body: Uint8List.fromList(
@@ -68,6 +69,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       Fluttertoast.showToast(msg: "Something went wrong");
     }
     return GrantTokenResponse(
+      username: "username",
       statusCode: "statusCode",
       statusMessage: "statusMessage",
       idToken: "idToken",
@@ -90,14 +92,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Authorization": idToken,
-        "X-App-Key": "4f6o0cjiki2rfm34kfdadl1eqq",
+        "X-App-Key": "vw9CCaJKDvr88CGS0H8xiUPgtc",
       },
       body: Uint8List.fromList(
         utf8.encode(
           jsonEncode(
             {
               "mode": "0011",
-              "payerReference": "01770618576",
+              "payerReference": "01737329731",
               "callbackURL": "https://tcean.store",
               "amount": amount,
               "currency": "BDT",
